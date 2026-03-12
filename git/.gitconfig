@@ -44,6 +44,3 @@
   undo   = reset HEAD~1 --mixed
   amend  = commit --amend --no-edit
   aliases = config --get-regexp alias
-
-[url "git@github.com:"]
-  insteadOf = https://github.com/

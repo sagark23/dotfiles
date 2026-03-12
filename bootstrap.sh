@@ -18,7 +18,7 @@ if ! command -v brew &>/dev/null; then
 fi
 
 echo "==> Installing Homebrew packages..."
-brew bundle install --file="$DOTFILES/Brewfile" --no-lock
+brew bundle install --file="$DOTFILES/Brewfile"
 
 # ─── Symlinks ─────────────────────────────────────────────────────────────────
 echo "==> Creating symlinks..."
@@ -30,24 +30,20 @@ symlink() {
   echo "   linked: $dst → $src"
 }
 
-symlink "$DOTFILES/zsh/.zshrc"               "$HOME/.zshrc"
-symlink "$DOTFILES/zsh/aliases.zsh"          "$HOME/.dotfiles/zsh/aliases.zsh"
-symlink "$DOTFILES/zsh/exports.zsh"          "$HOME/.dotfiles/zsh/exports.zsh"
-symlink "$DOTFILES/zsh/functions.zsh"        "$HOME/.dotfiles/zsh/functions.zsh"
-symlink "$DOTFILES/git/.gitconfig"           "$HOME/.gitconfig"
-symlink "$DOTFILES/git/.gitignore_global"    "$HOME/.gitignore_global"
-symlink "$DOTFILES/starship.toml"            "$HOME/.config/starship.toml"
-symlink "$DOTFILES/tmux/.tmux.conf"          "$HOME/.tmux.conf"
-symlink "$DOTFILES/mise/.mise.toml"          "$HOME/.config/mise/config.toml"
+symlink "$DOTFILES/zsh/.zshrc"            "$HOME/.zshrc"
+symlink "$DOTFILES/git/.gitconfig"        "$HOME/.gitconfig"
+symlink "$DOTFILES/git/.gitignore_global" "$HOME/.gitignore_global"
+symlink "$DOTFILES/starship.toml"         "$HOME/.config/starship.toml"
+symlink "$DOTFILES/tmux/.tmux.conf"       "$HOME/.tmux.conf"
+symlink "$DOTFILES/mise/.mise.toml"       "$HOME/.config/mise/config.toml"
 
 # ─── Shell ────────────────────────────────────────────────────────────────────
 BREW_ZSH="$(brew --prefix)/bin/zsh"
 if ! grep -qF "$BREW_ZSH" /etc/shells; then
-  echo "==> Adding Homebrew zsh to /etc/shells..."
-  echo "$BREW_ZSH" | sudo tee -a /etc/shells
-fi
-
-if [[ "$SHELL" != "$BREW_ZSH" ]]; then
+  echo "==> NOTE: Run these manually to set Homebrew zsh as default:"
+  echo "   echo '$BREW_ZSH' | sudo tee -a /etc/shells"
+  echo "   chsh -s $BREW_ZSH"
+elif [[ "$SHELL" != "$BREW_ZSH" ]]; then
   echo "==> Setting Homebrew zsh as default shell..."
   chsh -s "$BREW_ZSH"
 fi
