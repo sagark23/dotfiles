@@ -1,0 +1,49 @@
+[user]
+  name = Sagar
+  email = CHANGE_ME@example.com
+
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = nvim
+  pager = delta
+  autocrlf = input
+
+[init]
+  defaultBranch = main
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+
+[rebase]
+  autoStash = true
+
+[merge]
+  conflictstyle = zdiff3
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
+
+[delta]
+  navigate = true
+  light = false
+  side-by-side = true
+  line-numbers = true
+
+[interactive]
+  diffFilter = delta --color-only
+
+[alias]
+  lg     = log --oneline --graph --decorate --all
+  st     = status -sb
+  co     = checkout
+  cb     = checkout -b
+  undo   = reset HEAD~1 --mixed
+  amend  = commit --amend --no-edit
+  aliases = config --get-regexp alias
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

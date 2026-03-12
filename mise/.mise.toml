@@ -1,0 +1,10 @@
+# Global default tool versions managed by mise
+# Per-project overrides: add a .mise.toml in the project root
+
+[tools]
+node    = "lts"
+python  = "3.12"
+java    = "latest"
+
+[settings]
+experimental = true
